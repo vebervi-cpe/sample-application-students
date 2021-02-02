@@ -31,11 +31,12 @@ jobs:
         - cd sample-application-backend
       script:
         - echo "Docker build ..."
+        - echo $DOCKERHUB_USER
         - docker build -t backend .
         - echo "Docker login ..."
-        - docker login -u DOCKERHUB_USER -p DOCKERHUB_PWD
+        - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PWD
         - echo "Docker push ..."
-        - docker push DOCKERHUB_USER/backend
+        - docker push $DOCKERHUB_USER/backend
     - stage: "Package"
       before_script:
         - cd sample-application-frontend
@@ -43,9 +44,9 @@ jobs:
         - echo "Docker build ..."
         - docker build -t frontend .
         - echo "Docker login ..."
-        - docker login -u DOCKERHUB_USER -p DOCKERHUB_PWD
+        - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PWD
         - echo "Docker push ..."
-        - docker push DOCKERHUB_PWD/frontend
+        - docker push $DOCKERHUB_PWD/frontend
 
 cache:
   directories:
