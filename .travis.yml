@@ -1,27 +1,56 @@
 git:
   depth: 5
 
+stages:
+  - "Build and Test"
+  - "Package"
+
 jobs:
   include:
-    - stage: "Build and Test Java"
+    - stage: "Build and Test"
       language: java
       jdk: oraclejdk11
       before_script:
         - cd sample-application-backend
       script:
+        - echo "Maven build"
         - mvn clean install
+        - echo "Run test coverage and Quality Gate"
         - mvn test
-    
-    - stage: "Build and Test Nodejs"
-      language: node.js
-      node_js: "12.20"
-      before_script:
-        - cd sample-application-frontend
-      script:
-        - npm install
-        - npm run build
+  - stage: "Build and Test"
+    language: node.js
+    node_js: "12.20"
+    before_script:
+      - cd sample-application-frontend
+    script:
+      - echo "NPM install and build"
+      - npm install
+      - npm run build
+  - stage: "Package"
+    before_script:
+      - cd sample-application-backend
+    script:
+      - echo "Docker build ..."
+      - docker build -t backend
+      - echo "Docker login ..."
+      - docker login -u DOCKERHUB_USER -p DOCKERHUB_PWD
+      - echo "Docker push ..."
+      - docker push DOCKERHUB_USER/backend
+  - stage: "Package"
+    before_script:
+      - cd sample-application-frontend
+    script:
+      - echo "Docker build ..."
+      - docker build -t frontend
+      - echo "Docker login ..."
+      - docker login -u DOCKERHUB_USER -p DOCKERHUB_PWD
+      - echo "Docker push ..."
+      - docker push DOCKERHUB_PWD/frontend
 
 cache:
   directories:
     - "$HOME/.m2/repository"
     - "$HOME/.npm"
+
+services:
+  - docker
