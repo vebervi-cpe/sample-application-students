@@ -10,7 +10,7 @@ jobs:
         - cd sample-application-backend
       script:
         - mvn clean install
-        - mvn spring-boot:run
+        # - mvn spring-boot:run
         - mvn test
     
     - stage: "Build and Test Nodejs"
@@ -20,9 +20,9 @@ jobs:
         - cd sample-application-frontend
       script:
         - npm install
-        - npm run serve
-        - npm run build
-        - npm run lint
+        # - npm run serve
+         - npm run build
+        # - npm run lint
 
 cache:
   directories:
