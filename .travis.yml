@@ -14,14 +14,14 @@ jobs:
         - mvn test
     
     - stage: "Build and Test Nodejs"
-      language: node.js
+      language: node_js
       node_js: "12.20"
       before_script:
         - cd sample-application-frontend
       script:
         - npm install
         # - npm run serve
-         - npm run build
+        - npm run build
         # - npm run lint
 
 cache:
