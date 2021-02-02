@@ -45,7 +45,7 @@ jobs:
         - echo "Docker login ..."
         - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PWD
         - echo "Docker push ..."
-        - docker push $DOCKERHUB_PWD/frontend
+        - docker push $DOCKERHUB_USER/frontend
 
 cache:
   directories:
