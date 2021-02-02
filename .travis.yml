@@ -42,7 +42,7 @@ jobs:
         - cd sample-application-frontend
       script:
         - echo "Docker build ..."
-        - docker build -t $DOCKERHUB_PWD/frontend .
+        - docker build -t $DOCKERHUB_USER/frontend .
         - echo "Docker login ..."
         - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PWD
         - echo "Docker push ..."
