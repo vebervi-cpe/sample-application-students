@@ -10,19 +10,16 @@ jobs:
         - cd sample-application-backend
       script:
         - mvn clean install
-        # - mvn spring-boot:run
         - mvn test
     
     - stage: "Build and Test Nodejs"
-      language: node_js
+      language: node.js
       node_js: "12.20"
       before_script:
         - cd sample-application-frontend
       script:
         - npm install
-        # - npm run serve
         - npm run build
-        # - npm run lint
 
 cache:
   directories:
