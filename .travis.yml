@@ -31,7 +31,6 @@ jobs:
         - cd sample-application-backend
       script:
         - echo "Docker build ..."
-        - echo $DOCKERHUB_USER
         - docker build -t $DOCKERHUB_USER/backend .
         - echo "Docker login ..."
         - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PWD
