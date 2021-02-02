@@ -1,0 +1,30 @@
+git:
+  depth: 5
+
+jobs:
+  include:
+    - stage: "Build and Test Java"
+      language: java
+      jdk: oraclejdk11
+      before_script:
+        - cd sample-application-backend
+      script:
+        - mvn clean install
+        - mvn spring-boot:run
+        - mvn test
+    
+    - stage: "Build and Test Nodejs"
+      language: node.js
+      node_js: "12.20"
+      before_script:
+        - cd sample-application-frontend
+      script:
+        - npm install
+        - npm run serve
+        - npm run build
+        - npm run lint
+
+cache:
+  directories:
+    - "$HOME/.m2/repository"
+    - "$HOME/.npm"
