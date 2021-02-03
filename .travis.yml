@@ -25,7 +25,6 @@ jobs:
       script:
         - echo "NPM install and build"
         - npm install
-        - npm run serve
         - npm run build
         - npm run lint
     - stage: "Package"
