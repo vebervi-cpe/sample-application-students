@@ -1,0 +1,15 @@
+- name: Launch proxy
+  docker_container:
+    name: frontend
+    state: started
+    restart_policy: always
+    image: vebervi/frontend
+    pull: true
+    detach: yes
+    ports:
+      - "80:80"
+    networks:
+      - name: app-network
+
+# Sa tâche est de lancer cette commande :
+# docker run -d --network app-network --name frontend -p 80:80 vebervi/frontend

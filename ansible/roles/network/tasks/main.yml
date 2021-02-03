@@ -1,0 +1,6 @@
+- name: Create network
+  docker_network:
+    name: app-network
+
+# Sa tâche est de lancer cette commande :
+# docker network create app-network

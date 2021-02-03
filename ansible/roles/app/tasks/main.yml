@@ -1,0 +1,15 @@
+- name: Launch app
+  docker_container:
+    name: backend
+    state: started
+    restart_policy: always
+    image: vebervi/backend
+    pull: true
+    detach: yes
+    networks:
+      - name: app-network
+    env:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/SchoolOrganisation
+
+# Sa tâche est de lancer cette commande :
+# docker run -d --network app-network --name backend -e SPRING_DATASOURCE_URL="jdbc:postgresql://database:5432/SchoolOrganisation" vebervi/backend

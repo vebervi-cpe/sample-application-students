@@ -1,0 +1,56 @@
+# Install Docker
+- name: Install yum-utils
+  yum:
+    name: yum-utils
+    state: latest
+
+- name: Install device-mapper-persistent-data
+  yum:
+    name: device-mapper-persistent-data
+    state: latest
+
+- name: Install lvm2
+  yum:
+    name: lvm2
+    state: latest
+
+- name: Add Docker stable repository
+  yum_repository:
+    name: docker-ce
+    description: Docker CE Stable - $basearch
+    baseurl: https://download.docker.com/linux/centos/7/$basearch/stable
+    state: present
+    enabled: yes
+    gpgcheck: yes
+
+- name: Install Docker
+  yum:
+    name: docker-ce
+    state: present
+
+# Install tools needed by Ansible to run Docker
+- name: Install epel-release
+  yum:
+    name: epel-release
+    state: latest
+
+- name: Install python-pip
+  yum:
+    name: python-pip
+    state: latest
+
+- name: Install python setup tools
+  yum: name=python-setuptools
+  tags: docker
+
+- name: Install Pypi
+  easy_install: name=pip
+  tags: docker
+
+- name: Install docker-py
+  pip: name=docker-py
+  tags: docker
+
+- name: Make sure Docker is running
+  service: name=docker state=started
+  tags: docker

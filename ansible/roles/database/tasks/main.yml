@@ -1,0 +1,17 @@
+- name: Launch database
+  docker_container:
+    name: database
+    state: started
+    restart_policy: always
+    image: postgres:12.0-alpine
+    pull: true
+    detach: yes
+    networks:
+      - name: app-network
+    env:
+      POSTGRES_PASSWORD: takimapass
+      POSTGRES_USER: takima
+      POSTGRES_DB: SchoolOrganisation
+
+# Sa tâche est de lancer cette commande :
+# docker run -d --network app-network --name database -e POSTGRES_PASSWORD="takimapass" -e POSTGRES_USER="takima" -e POSTGRES_DB="SchoolOrganisation" postgres:12.0-alpine

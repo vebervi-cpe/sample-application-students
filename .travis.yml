@@ -4,6 +4,7 @@ git:
 stages:
   - "Build and Test"
   - "Package"
+  - "Deployment"
 
 jobs:
   include:
@@ -49,6 +50,16 @@ jobs:
         - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PWD
         - echo "Docker push ..."
         - docker push $DOCKERHUB_USER/frontend
+    - stage: "Deployment"
+      before_script:
+        - cd ansible
+      script:
+        - echo "Create temp file ssh_key"
+        - echo $SSH_KEY >> ssh_key
+        - echo "Ansible playbook ..."
+        - ansible-playbook -v -i inventories/setup.yml playbook.yml
+        - echo "Remove temp file ssh_key"
+        - rm ssh_key
 
 cache:
   directories:
