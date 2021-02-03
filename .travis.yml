@@ -53,6 +53,7 @@ jobs:
     - stage: "Deployment"
       before_script:
         - cd ansible
+        - sudo apt install ansible
       script:
         - echo "Create temp file ssh_key"
         - echo $SSH_KEY >> ssh_key
