@@ -17,6 +17,7 @@ jobs:
         - mvn clean install
         - echo "Run test coverage and Quality Gate"
         - mvn test
+        - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=vebervi-cpe_sample-application-students
     - stage: "Build and Test"
       language: node.js
       node_js: "12.20"
@@ -55,3 +56,8 @@ cache:
 
 services:
   - docker
+
+addons:
+  sonarcloud:
+    organization: "devops-cpe"
+    token: "$SONARCLOUD_TOKEN"
