@@ -57,11 +57,12 @@ jobs:
         - sudo apt-get install ansible
       script:
         - echo "Create temp file ssh_key"
-        - echo $SSH_KEY >> ssh_key
+        - echo $SSH_KEY >> ~/.ssh/id_rsa
+        - chmod 600 ~/.ssh/id_rsa
         - echo "Ansible playbook ..."
         - ansible-playbook -v -i inventories/setup.yml playbook.yml
         - echo "Remove temp file ssh_key"
-        - rm ssh_key
+        - rm ~/.ssh/id_rsa
 
 cache:
   directories:
