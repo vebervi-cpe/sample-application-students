@@ -53,10 +53,12 @@ jobs:
     - stage: "Deployment"
       before_script:
         - cd ansible
+        - sudo apt-add-repository --yes --update ppa:ansible/ansible
         - sudo apt-get install ansible
       script:
         - echo "Create temp file ssh_key"
         - echo $SSH_KEY >> ssh_key
+        - sudo chmod 400 ssh_key
         - echo "Ansible playbook ..."
         - ansible-playbook -v -i inventories/setup.yml playbook.yml
         - echo "Remove temp file ssh_key"
