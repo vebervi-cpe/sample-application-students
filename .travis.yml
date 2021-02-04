@@ -61,7 +61,7 @@ jobs:
         - echo "Change rights to id_rsa"
         - chmod 600 ~/.ssh/id_rsa
         - echo "Ansible playbook ..."
-        - echo "" | ansible-playbook -v -i inventories/setup.yml playbook.yml
+        - ansible-playbook -v -i inventories/setup.yml playbook.yml
         - echo "Remove temp file id_rsa"
         - rm ~/.ssh/id_rsa
 
