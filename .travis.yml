@@ -58,8 +58,6 @@ jobs:
       script:
         - echo "Create temp file ssh_key"
         - echo $SSH_KEY >> ssh_key
-        - echo "Change rights on ssh_key"
-        - sudo chmod 600 ssh_key
         - echo "Ansible playbook ..."
         - ansible-playbook -v -i inventories/setup.yml playbook.yml
         - echo "Remove temp file ssh_key"
